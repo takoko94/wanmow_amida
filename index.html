@@ -77,7 +77,7 @@ body{
   letter-spacing:2px;
 
   text-shadow:
-    0 2px 8px rgba(255,255,255,0.95);
+    0 2px 6px rgba(255,255,255,0.9);
 
   margin-bottom:10px;
 }
@@ -93,9 +93,8 @@ body{
   letter-spacing:4px;
 
   text-shadow:
-    0 0 0 #fff,
-    0 5px 0 #fff,
-    0 10px 25px rgba(255,143,176,0.45);
+    0 4px 0 #fff,
+    0 8px 18px rgba(255,143,176,0.35);
 }
 
 .title p{
@@ -171,9 +170,7 @@ body{
   line-height:1.15;
 
   text-shadow:
-    0 0 0 #fff,
-    0 3px 0 #fff,
-    0 8px 18px rgba(255,143,176,0.35);
+    0 2px 0 #fff;
 }
 
 /* レース */
@@ -259,8 +256,6 @@ body{
   border:5px solid white;
 
   will-change:transform;
-
-  animation:bounce 1.2s ease-in-out infinite;
 }
 
 .runner img{
@@ -269,43 +264,6 @@ body{
   height:100%;
 
   object-fit:cover;
-}
-
-/* ぴょこぴょこ */
-
-#dachs{
-  animation-delay:0s;
-}
-
-#schna{
-  animation-delay:0.1s;
-}
-
-#maltipoo{
-  animation-delay:0.2s;
-}
-
-#shiba{
-  animation-delay:0.3s;
-}
-
-#cavalier{
-  animation-delay:0.4s;
-}
-
-@keyframes bounce{
-
-  0%{
-    margin-top:0px;
-  }
-
-  50%{
-    margin-top:-3px;
-  }
-
-  100%{
-    margin-top:0px;
-  }
 }
 
 /* START */
@@ -660,7 +618,7 @@ function animate(){
 
   let finished = 0;
 
-  dogs.forEach((d)=>{
+  dogs.forEach((d,index)=>{
 
     const el =
     document.getElementById(d.id);
@@ -689,6 +647,7 @@ function animate(){
     el.style.transform =
     `
     translateX(${d.x}px)
+    translateY(${Math.sin(Date.now()/220 + index)*2}px)
     `;
   });
 
