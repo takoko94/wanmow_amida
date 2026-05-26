@@ -49,20 +49,11 @@ body{
     );
 }
 
-/* 共通 */
-
-.screen{
-  position:absolute;
-  inset:0;
-
-  transition:1s;
-}
-
 /* タイトル */
 
 .title{
   position:absolute;
-  top:10px;
+  top:8px;
   width:100%;
   text-align:center;
   z-index:100;
@@ -84,16 +75,23 @@ body{
   color:#8d8378;
 }
 
-/* 紹介画面 */
+/* 紹介 */
 
-#intro{
+#introScreen{
+
+  position:absolute;
+  inset:0;
 
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:24px;
+  gap:22px;
 
-  padding-top:40px;
+  padding-top:30px;
+
+  transition:1s;
+
+  z-index:200;
 }
 
 .card{
@@ -115,8 +113,6 @@ body{
 
   box-shadow:
     0 18px 35px rgba(0,0,0,0.15);
-
-  transition:.5s;
 }
 
 .card img{
@@ -138,28 +134,24 @@ body{
 
   margin-top:18px;
 
-  font-size:34px;
+  font-size:30px;
 
   color:#ff8eb5;
+
+  text-align:center;
 }
 
 /* レース */
-
-#race{
-
-  opacity:0;
-  pointer-events:none;
-}
 
 .trackArea{
 
   position:absolute;
 
-  left:70px;
+  left:60px;
   top:130px;
 
-  width:1140px;
-  height:450px;
+  width:1160px;
+  height:500px;
 }
 
 /* ゴール */
@@ -168,10 +160,10 @@ body{
 
   position:absolute;
 
-  right:0;
+  right:40px;
   top:0;
 
-  width:22px;
+  width:20px;
   height:100%;
 
   border-radius:999px;
@@ -180,9 +172,9 @@ body{
     repeating-linear-gradient(
       to bottom,
       #fff 0px,
-      #fff 26px,
-      #ffd56a 26px,
-      #ffd56a 52px
+      #fff 24px,
+      #ffd56a 24px,
+      #ffd56a 48px
     );
 
   box-shadow:
@@ -196,26 +188,58 @@ body{
   position:relative;
 
   width:100%;
-  height:82px;
+  height:90px;
 
   margin-bottom:10px;
 
   border-radius:999px;
 
   background:
-    rgba(255,255,255,0.13);
+    rgba(255,255,255,0.14);
 
   overflow:hidden;
+
+  backdrop-filter:blur(4px);
 }
 
-/* ランナー */
+.lane::after{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  height:3px;
+
+  background:
+    rgba(255,255,255,0.22);
+}
+
+/* 距離線 */
+
+.mark{
+
+  position:absolute;
+  top:12px;
+
+  width:3px;
+  height:66px;
+
+  background:
+    rgba(255,255,255,0.14);
+}
+
+/* 犬 */
 
 .runner{
 
   position:absolute;
 
   left:0;
-  top:11px;
+  top:8px;
 
   width:64px;
   height:64px;
@@ -247,7 +271,7 @@ body{
   position:absolute;
 
   left:50%;
-  bottom:28px;
+  bottom:24px;
 
   transform:translateX(-50%);
 
@@ -278,7 +302,7 @@ body{
     0 10px 24px rgba(0,0,0,0.2);
 }
 
-/* 結果 */
+/* WINNER */
 
 #winnerScreen{
 
@@ -291,7 +315,7 @@ body{
   flex-direction:column;
 
   background:
-    rgba(255,255,255,0.28);
+    rgba(255,255,255,0.24);
 
   backdrop-filter:blur(10px);
 
@@ -390,98 +414,86 @@ body{
 <img src="haikei.png" class="bg">
 <div class="overlay"></div>
 
+<div class="title">
+  <h1>わんも～杯 推し犬レース</h1>
+  <p>投票人数ランキング</p>
+</div>
+
 <!-- 紹介 -->
 
-<div class="screen" id="introScreen">
+<div id="introScreen">
 
-  <div class="title">
-    <h1>わんも～杯 推し犬レース</h1>
-    <p>出走メンバー紹介</p>
+  <div class="card">
+    <img src="dachs.png">
+    <div class="cardName">
+      ダックスフンド
+    </div>
   </div>
 
-  <div id="intro">
-
-    <div class="card">
-      <img src="dachs.png">
-      <div class="cardName">
-        ダックス
-      </div>
+  <div class="card">
+    <img src="schna.png">
+    <div class="cardName">
+      シュナウザー
     </div>
+  </div>
 
-    <div class="card">
-      <img src="schna.png">
-      <div class="cardName">
-        シュナ
-      </div>
+  <div class="card">
+    <img src="maltipoo.png">
+    <div class="cardName">
+      マルトイプー
     </div>
+  </div>
 
-    <div class="card">
-      <img src="maltipoo.png">
-      <div class="cardName">
-        マルトイプー
-      </div>
+  <div class="card">
+    <img src="shiba.png">
+    <div class="cardName">
+      柴犬
     </div>
+  </div>
 
-    <div class="card">
-      <img src="shiba.png">
-      <div class="cardName">
-        柴犬
-      </div>
+  <div class="card">
+    <img src="cavalier.png">
+    <div class="cardName">
+      キャバリア
     </div>
-
-    <div class="card">
-      <img src="cavalier.png">
-      <div class="cardName">
-        キャバリア
-      </div>
-    </div>
-
   </div>
 
 </div>
 
 <!-- レース -->
 
-<div class="screen" id="race">
+<div class="trackArea">
 
-  <div class="title">
-    <h1>RACE START</h1>
+  <div class="goal"></div>
+
+  <div class="lane">
+    <div class="runner" id="dachs">
+      <img src="dachs.png">
+    </div>
   </div>
 
-  <div class="trackArea">
-
-    <div class="goal"></div>
-
-    <div class="lane">
-      <div class="runner" id="dachs">
-        <img src="dachs.png">
-      </div>
+  <div class="lane">
+    <div class="runner" id="schna">
+      <img src="schna.png">
     </div>
+  </div>
 
-    <div class="lane">
-      <div class="runner" id="schna">
-        <img src="schna.png">
-      </div>
+  <div class="lane">
+    <div class="runner" id="maltipoo">
+      <img src="maltipoo.png">
     </div>
+  </div>
 
-    <div class="lane">
-      <div class="runner" id="maltipoo">
-        <img src="maltipoo.png">
-      </div>
+  <div class="lane">
+    <div class="runner" id="shiba">
+      <img src="shiba.png">
     </div>
+  </div>
 
-    <div class="lane">
-      <div class="runner" id="shiba">
-        <img src="shiba.png">
-      </div>
+  <div class="lane">
+    <div class="runner" id="cavalier">
+      <img src="cavalier.png">
     </div>
-
-    <div class="lane">
-      <div class="runner" id="cavalier">
-        <img src="cavalier.png">
-      </div>
-    </div>
-
   </div>
 
 </div>
@@ -510,40 +522,60 @@ START
 
 <script>
 
+/* 距離線 */
+
+const trackArea =
+document.querySelector('.trackArea');
+
+for(let i=1;i<=10;i++){
+
+  const mark =
+  document.createElement('div');
+
+  mark.className='mark';
+
+  mark.style.left =
+    (i*100)+'px';
+
+  trackArea.appendChild(mark);
+}
+
+/* 犬 */
+
 const dogs = [
 
 {
   id:'dachs',
   x:0,
-  speed:0.65,
+  speed:0.42,
   final:760
 },
 
 {
   id:'schna',
   x:0,
-  speed:0.74,
-  final:850
+  speed:0.48,
+  final:860
 },
 
 {
   id:'maltipoo',
   x:0,
-  speed:0.82,
-  final:930
+  speed:0.54,
+  final:940
 },
 
 {
   id:'cavalier',
   x:0,
-  speed:0.91,
-  final:1020
+  speed:0.58,
+  final:1030
 },
 
 {
   id:'shiba',
   x:0,
-  speed:0.86,
+  speed:0.56,
   final:1080
 }
 
@@ -561,19 +593,15 @@ document
   .getElementById('startBtn')
   .style.display='none';
 
-  await sleep(2800);
+  /* 紹介長め */
+
+  await sleep(4000);
 
   document
   .getElementById('introScreen')
   .style.opacity='0';
 
   await sleep(1200);
-
-  const race =
-  document.getElementById('race');
-
-  race.style.opacity='1';
-  race.style.pointerEvents='auto';
 
   running = true;
 
@@ -593,22 +621,22 @@ function animate(){
     const el =
     document.getElementById(d.id);
 
-    /* 柴犬ラスト加速 */
+    /* 柴犬ラストスパート */
 
     if(
       d.id==='shiba'
       && d.x > 760
     ){
-      d.speed += 0.0028;
+      d.speed += 0.0012;
     }
 
-    /* 超微ランダム */
+    /* 微ランダム */
 
     d.speed +=
-      (Math.random()-0.5)*0.01;
+      (Math.random()-0.5)*0.004;
 
     d.speed =
-      Math.max(0.58,d.speed);
+      Math.max(0.38,d.speed);
 
     d.x += d.speed;
 
@@ -621,7 +649,7 @@ function animate(){
     el.style.transform =
     `
     translateX(${d.x}px)
-    translateY(${Math.sin(Date.now()/140 + index)*2}px)
+    translateY(${Math.sin(Date.now()/180 + index)*2}px)
     `;
   });
 
@@ -643,7 +671,7 @@ async function finishRace(){
 
   confetti();
 
-  await sleep(1500);
+  await sleep(1800);
 
   document
   .getElementById('winnerScreen')
