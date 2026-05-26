@@ -49,11 +49,20 @@ body{
     );
 }
 
+/* 共通 */
+
+.screen{
+  position:absolute;
+  inset:0;
+
+  transition:1s;
+}
+
 /* タイトル */
 
 .title{
   position:absolute;
-  top:8px;
+  top:10px;
   width:100%;
   text-align:center;
   z-index:100;
@@ -75,17 +84,82 @@ body{
   color:#8d8378;
 }
 
-/* レースエリア */
+/* 紹介画面 */
+
+#intro{
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:24px;
+
+  padding-top:40px;
+}
+
+.card{
+
+  width:200px;
+  height:320px;
+
+  border-radius:36px;
+
+  background:
+    rgba(255,255,255,0.82);
+
+  backdrop-filter:blur(8px);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:
+    0 18px 35px rgba(0,0,0,0.15);
+
+  transition:.5s;
+}
+
+.card img{
+
+  width:140px;
+  height:140px;
+
+  border-radius:999px;
+
+  object-fit:cover;
+
+  border:6px solid white;
+
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.15);
+}
+
+.cardName{
+
+  margin-top:18px;
+
+  font-size:34px;
+
+  color:#ff8eb5;
+}
+
+/* レース */
+
+#race{
+
+  opacity:0;
+  pointer-events:none;
+}
 
 .trackArea{
 
   position:absolute;
 
-  left:60px;
-  top:120px;
+  left:70px;
+  top:130px;
 
-  width:1160px;
-  height:500px;
+  width:1140px;
+  height:450px;
 }
 
 /* ゴール */
@@ -94,10 +168,10 @@ body{
 
   position:absolute;
 
-  right:40px;
+  right:0;
   top:0;
 
-  width:20px;
+  width:22px;
   height:100%;
 
   border-radius:999px;
@@ -106,9 +180,9 @@ body{
     repeating-linear-gradient(
       to bottom,
       #fff 0px,
-      #fff 24px,
-      #ffd56a 24px,
-      #ffd56a 48px
+      #fff 26px,
+      #ffd56a 26px,
+      #ffd56a 52px
     );
 
   box-shadow:
@@ -122,168 +196,48 @@ body{
   position:relative;
 
   width:100%;
-  height:90px;
+  height:82px;
 
   margin-bottom:10px;
 
   border-radius:999px;
 
   background:
-    rgba(255,255,255,0.14);
+    rgba(255,255,255,0.13);
 
   overflow:hidden;
-
-  backdrop-filter:blur(4px);
 }
 
-.lane::after{
-
-  content:'';
-
-  position:absolute;
-
-  left:0;
-  right:0;
-  bottom:0;
-
-  height:3px;
-
-  background:
-    rgba(255,255,255,0.22);
-}
-
-/* 距離線 */
-
-.mark{
-
-  position:absolute;
-  top:12px;
-
-  width:3px;
-  height:66px;
-
-  background:
-    rgba(255,255,255,0.14);
-}
-
-.markText{
-
-  position:absolute;
-
-  top:-8px;
-  left:-18px;
-
-  color:white;
-
-  font-size:18px;
-
-  opacity:0.55;
-}
-
-/* 犬 */
+/* ランナー */
 
 .runner{
 
   position:absolute;
 
-  left:10px;
-  top:8px;
+  left:0;
+  top:11px;
 
-  width:240px;
-  height:74px;
-
-  border-radius:999px;
-
-  display:flex;
-  align-items:center;
-
-  padding:
-    0 18px;
-
-  color:white;
-
-  font-size:28px;
-
-  z-index:30;
-
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.18),
-    inset 0 4px 10px rgba(255,255,255,0.35);
-
-  will-change:transform;
-}
-
-/* アイコン */
-
-.icon{
-
-  width:60px;
-  height:60px;
+  width:64px;
+  height:64px;
 
   border-radius:999px;
 
   overflow:hidden;
 
-  margin-right:14px;
-
-  flex-shrink:0;
-
-  border:4px solid white;
+  border:5px solid white;
 
   box-shadow:
-    0 6px 12px rgba(0,0,0,0.15);
+    0 8px 18px rgba(0,0,0,0.18);
+
+  will-change:transform;
 }
 
-.icon img{
+.runner img{
 
   width:100%;
   height:100%;
 
   object-fit:cover;
-}
-
-/* 順位 */
-
-.rank{
-
-  position:absolute;
-
-  right:20px;
-  top:18px;
-
-  font-size:42px;
-
-  color:white;
-
-  opacity:0;
-
-  transition:.6s;
-}
-
-.rank.show{
-  opacity:1;
-}
-
-/* 脱落 */
-
-.out{
-
-  filter:
-    grayscale(1);
-
-  opacity:0.45;
-}
-
-/* 優勝 */
-
-.winner{
-
-  transform:
-    scale(1.08);
-
-  box-shadow:
-    0 0 44px gold,
-    0 10px 24px rgba(0,0,0,0.2);
 }
 
 /* START */
@@ -293,7 +247,7 @@ body{
   position:absolute;
 
   left:50%;
-  bottom:24px;
+  bottom:28px;
 
   transform:translateX(-50%);
 
@@ -324,7 +278,7 @@ body{
     0 10px 24px rgba(0,0,0,0.2);
 }
 
-/* WINNER */
+/* 結果 */
 
 #winnerScreen{
 
@@ -337,7 +291,7 @@ body{
   flex-direction:column;
 
   background:
-    rgba(255,255,255,0.24);
+    rgba(255,255,255,0.28);
 
   backdrop-filter:blur(10px);
 
@@ -353,9 +307,26 @@ body{
   opacity:1;
 }
 
+#winnerScreen img{
+
+  width:220px;
+  height:220px;
+
+  border-radius:999px;
+
+  object-fit:cover;
+
+  border:10px solid white;
+
+  box-shadow:
+    0 0 40px gold;
+}
+
 #winnerScreen h1{
 
-  font-size:130px;
+  margin-top:24px;
+
+  font-size:120px;
 
   color:#ffbf00;
 
@@ -419,137 +390,107 @@ body{
 <img src="haikei.png" class="bg">
 <div class="overlay"></div>
 
-<div class="title">
-  <h1>わんも～杯 推し犬レース</h1>
-  <p>投票人数ランキング</p>
+<!-- 紹介 -->
+
+<div class="screen" id="introScreen">
+
+  <div class="title">
+    <h1>わんも～杯 推し犬レース</h1>
+    <p>出走メンバー紹介</p>
+  </div>
+
+  <div id="intro">
+
+    <div class="card">
+      <img src="dachs.png">
+      <div class="cardName">
+        ダックス
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="schna.png">
+      <div class="cardName">
+        シュナ
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="maltipoo.png">
+      <div class="cardName">
+        マルトイプー
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="shiba.png">
+      <div class="cardName">
+        柴犬
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="cavalier.png">
+      <div class="cardName">
+        キャバリア
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
-<div class="trackArea">
+<!-- レース -->
 
-  <div class="goal"></div>
+<div class="screen" id="race">
 
-  <!-- ダックス -->
+  <div class="title">
+    <h1>RACE START</h1>
+  </div>
 
-  <div class="lane">
+  <div class="trackArea">
 
-    <div class="runner"
-    id="dachs"
-    style="background:#ffb27d;">
+    <div class="goal"></div>
 
-      <div class="icon">
+    <div class="lane">
+      <div class="runner" id="dachs">
         <img src="dachs.png">
       </div>
-
-      ダックスフンド
-
     </div>
 
-    <div class="rank"
-    id="rank-dachs">
-      5位
-    </div>
-
-  </div>
-
-  <!-- シュナ -->
-
-  <div class="lane">
-
-    <div class="runner"
-    id="schna"
-    style="background:#aeb5ff;">
-
-      <div class="icon">
+    <div class="lane">
+      <div class="runner" id="schna">
         <img src="schna.png">
       </div>
-
-      シュナウザー
-
     </div>
 
-    <div class="rank"
-    id="rank-schna">
-      4位
-    </div>
-
-  </div>
-
-  <!-- マルトイプー -->
-
-  <div class="lane">
-
-    <div class="runner"
-    id="maltipoo"
-    style="background:#ffcfe6;">
-
-      <div class="icon">
+    <div class="lane">
+      <div class="runner" id="maltipoo">
         <img src="maltipoo.png">
       </div>
-
-      マルトイプー
-
     </div>
 
-    <div class="rank"
-    id="rank-maltipoo">
-      3位
-    </div>
-
-  </div>
-
-  <!-- 柴犬 -->
-
-  <div class="lane">
-
-    <div class="runner"
-    id="shiba"
-    style="background:#ff9f69;">
-
-      <div class="icon">
+    <div class="lane">
+      <div class="runner" id="shiba">
         <img src="shiba.png">
       </div>
-
-      柴犬
-
     </div>
 
-    <div class="rank"
-    id="rank-shiba">
-      🥇1位
-    </div>
-
-  </div>
-
-  <!-- キャバリア -->
-
-  <div class="lane">
-
-    <div class="runner"
-    id="cavalier"
-    style="background:#ffb8d8;">
-
-      <div class="icon">
+    <div class="lane">
+      <div class="runner" id="cavalier">
         <img src="cavalier.png">
       </div>
-
-      キャバリア
-
-    </div>
-
-    <div class="rank"
-    id="rank-cavalier">
-      2位
     </div>
 
   </div>
 
 </div>
 
-<button id="startBtn">
-START
-</button>
+<!-- 結果 -->
 
 <div id="winnerScreen">
+
+  <img src="shiba.png">
 
   <h1>🥇</h1>
 
@@ -563,65 +504,46 @@ START
 
 </div>
 
+<button id="startBtn">
+START
+</button>
+
 <script>
-
-/* 距離線 */
-
-const trackArea =
-document.querySelector('.trackArea');
-
-for(let i=1;i<=10;i++){
-
-  const mark =
-  document.createElement('div');
-
-  mark.className='mark';
-
-  mark.style.left =
-    (i*100)+'px';
-
-  mark.innerHTML =
-  `<div class="markText">${i*100}</div>`;
-
-  trackArea.appendChild(mark);
-}
-
-/* 犬 */
 
 const dogs = [
 
 {
   id:'dachs',
   x:0,
-  speed:1.45,
+  speed:0.65,
   final:760
 },
 
 {
   id:'schna',
   x:0,
-  speed:1.8,
-  final:860
+  speed:0.74,
+  final:850
 },
 
 {
   id:'maltipoo',
   x:0,
-  speed:2.15,
-  final:940
+  speed:0.82,
+  final:930
 },
 
 {
   id:'cavalier',
   x:0,
-  speed:2.45,
-  final:1030
+  speed:0.91,
+  final:1020
 },
 
 {
   id:'shiba',
   x:0,
-  speed:2.2,
+  speed:0.86,
   final:1080
 }
 
@@ -629,18 +551,36 @@ const dogs = [
 
 let running = false;
 
+/* START */
+
 document
 .getElementById('startBtn')
-.onclick = ()=>{
+.onclick = async()=>{
 
   document
   .getElementById('startBtn')
   .style.display='none';
 
+  await sleep(2800);
+
+  document
+  .getElementById('introScreen')
+  .style.opacity='0';
+
+  await sleep(1200);
+
+  const race =
+  document.getElementById('race');
+
+  race.style.opacity='1';
+  race.style.pointerEvents='auto';
+
   running = true;
 
   animate();
 };
+
+/* レース */
 
 function animate(){
 
@@ -653,22 +593,22 @@ function animate(){
     const el =
     document.getElementById(d.id);
 
-    /* 柴犬ラストスパート */
+    /* 柴犬ラスト加速 */
 
     if(
       d.id==='shiba'
-      && d.x > 700
+      && d.x > 760
     ){
-      d.speed += 0.015;
+      d.speed += 0.0028;
     }
 
-    /* 微ランダム */
+    /* 超微ランダム */
 
     d.speed +=
-      (Math.random()-0.5)*0.04;
+      (Math.random()-0.5)*0.01;
 
     d.speed =
-      Math.max(1.2,d.speed);
+      Math.max(0.58,d.speed);
 
     d.x += d.speed;
 
@@ -681,11 +621,9 @@ function animate(){
     el.style.transform =
     `
     translateX(${d.x}px)
-    translateY(${Math.sin(Date.now()/90 + index)*2}px)
+    translateY(${Math.sin(Date.now()/140 + index)*2}px)
     `;
   });
-
-  /* 終了 */
 
   if(finished >= dogs.length){
 
@@ -697,46 +635,15 @@ function animate(){
   requestAnimationFrame(animate);
 }
 
-/* 終了演出 */
+/* 終了 */
 
 async function finishRace(){
 
   running = false;
 
-  const order = [
-    'dachs',
-    'schna',
-    'maltipoo',
-    'cavalier',
-    'shiba'
-  ];
-
-  for(let id of order){
-
-    document
-    .getElementById(
-      'rank-'+id
-    )
-    .classList.add('show');
-
-    if(id!=='shiba'
-    && id!=='cavalier'){
-
-      document
-      .getElementById(id)
-      .classList.add('out');
-    }
-
-    await sleep(700);
-  }
-
-  document
-  .getElementById('shiba')
-  .classList.add('winner');
-
   confetti();
 
-  await sleep(1200);
+  await sleep(1500);
 
   document
   .getElementById('winnerScreen')
@@ -747,7 +654,7 @@ async function finishRace(){
 
 function confetti(){
 
-  for(let i=0;i<160;i++){
+  for(let i=0;i<180;i++){
 
     const c =
     document.createElement('div');
