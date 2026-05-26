@@ -571,8 +571,6 @@ const dogs = [
 
 let running = false;
 
-/* START */
-
 document
 .getElementById('startBtn')
 .onclick = async()=>{
@@ -594,8 +592,6 @@ document
   animate();
 };
 
-/* レース */
-
 function animate(){
 
   if(!running)return;
@@ -607,16 +603,12 @@ function animate(){
     const el =
     document.getElementById(d.id);
 
-    /* 柴犬ラストスパート */
-
     if(
       d.id==='shiba'
       && d.x > 760
     ){
       d.speed += 0.0005;
     }
-
-    /* ランダム */
 
     d.speed +=
       (Math.random()-0.5)*0.004;
@@ -649,8 +641,6 @@ function animate(){
   requestAnimationFrame(animate);
 }
 
-/* 終了 */
-
 async function finishRace(){
 
   running = false;
@@ -663,8 +653,6 @@ async function finishRace(){
   .getElementById('winnerScreen')
   .classList.add('show');
 }
-
-/* 紙吹雪 */
 
 function confetti(){
 
