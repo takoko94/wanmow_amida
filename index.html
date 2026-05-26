@@ -69,7 +69,7 @@ body{
 }
 
 .title h1{
-  font-size:64px;
+  font-size:56px;
 
   color:#ff8eb5;
 
@@ -79,7 +79,7 @@ body{
 }
 
 .title p{
-  margin-top:2px;
+  margin-top:4px;
   font-size:24px;
   color:#8d8378;
 }
@@ -91,9 +91,11 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:24px;
+  gap:20px;
 
-  padding-top:40px;
+  padding-top:70px;
+
+  transform:translateY(-10px);
 }
 
 .card{
@@ -138,9 +140,13 @@ body{
 
   margin-top:18px;
 
-  font-size:34px;
+  font-size:30px;
 
   color:#ff8eb5;
+
+  text-align:center;
+
+  line-height:1.15;
 }
 
 /* レース */
@@ -171,7 +177,7 @@ body{
   right:0;
   top:0;
 
-  width:22px;
+  width:28px;
   height:100%;
 
   border-radius:999px;
@@ -179,14 +185,17 @@ body{
   background:
     repeating-linear-gradient(
       to bottom,
-      #fff 0px,
-      #fff 26px,
-      #ffd56a 26px,
-      #ffd56a 52px
+      #ffffff 0px,
+      #ffffff 24px,
+      #ff5ca8 24px,
+      #ff5ca8 48px
     );
 
+  border:3px solid white;
+
   box-shadow:
-    0 0 20px rgba(255,255,255,0.9);
+    0 0 25px rgba(255,255,255,1),
+    0 0 40px rgba(255,92,168,0.9);
 }
 
 /* レーン */
@@ -395,7 +404,7 @@ body{
 <div class="screen" id="introScreen">
 
   <div class="title">
-    <h1>わんも～杯 推し犬レース</h1>
+    <h1>クッキー化になるのはどのわんちゃんだ!? わんも～推し犬レース!!</h1>
     <p>出走メンバー紹介</p>
   </div>
 
@@ -404,21 +413,21 @@ body{
     <div class="card">
       <img src="dachs.png">
       <div class="cardName">
-        ダックス
+        ダックスフンド
       </div>
     </div>
 
     <div class="card">
       <img src="schna.png">
       <div class="cardName">
-        シュナ
+        シュナウザー
       </div>
     </div>
 
     <div class="card">
       <img src="maltipoo.png">
       <div class="cardName">
-        マルトイプー
+        マルプー
       </div>
     </div>
 
@@ -515,35 +524,35 @@ const dogs = [
 {
   id:'dachs',
   x:0,
-  speed:0.65,
+  speed:0.42,
   final:760
 },
 
 {
   id:'schna',
   x:0,
-  speed:0.74,
+  speed:0.47,
   final:850
 },
 
 {
   id:'maltipoo',
   x:0,
-  speed:0.82,
+  speed:0.52,
   final:930
 },
 
 {
   id:'cavalier',
   x:0,
-  speed:0.91,
+  speed:0.57,
   final:1020
 },
 
 {
   id:'shiba',
   x:0,
-  speed:0.86,
+  speed:0.54,
   final:1080
 }
 
@@ -599,16 +608,16 @@ function animate(){
       d.id==='shiba'
       && d.x > 760
     ){
-      d.speed += 0.0028;
+      d.speed += 0.0012;
     }
 
     /* 超微ランダム */
 
     d.speed +=
-      (Math.random()-0.5)*0.01;
+      (Math.random()-0.5)*0.004;
 
     d.speed =
-      Math.max(0.58,d.speed);
+      Math.max(0.36,d.speed);
 
     d.x += d.speed;
 
@@ -621,7 +630,7 @@ function animate(){
     el.style.transform =
     `
     translateX(${d.x}px)
-    translateY(${Math.sin(Date.now()/140 + index)*2}px)
+    translateY(${Math.sin(Date.now()/180 + index)*2}px)
     `;
   });
 
