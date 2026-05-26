@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280,height=720">
+
+<title>わんも～推し犬運命あみだ</title>
+
+<style>
+
+@font-face{
+  font-family:'Panda';
+  src:url('pandabakery.ttf');
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  width:1280px;
+  height:720px;
+  overflow:hidden;
+  position:relative;
+  background:#f2d7a5;
+  font-family:'Panda',sans-serif;
+}
+
+/* 背景 */
+
+.bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,0.05);
+  z-index:1;
+}
+
+/* タイトル */
+
+.title{
+  position:absolute;
+  top:20px;
+  width:100%;
+  text-align:center;
+  z-index:50;
+}
+
+.title h1{
+  font-size:58px;
+  color:#ff8eb5;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.95),
+    0 0 20px rgba(255,255,255,0.9),
+    0 4px 0 rgba(255,255,255,0.4);
+}
+
+.title p{
+  margin-top:4px;
+  font-size:24px;
+  color:#91857b;
+}
+
+/* ボード */
+
+#board{
+  position:absolute;
+  inset:0;
+  z-index:10;
+}
+
+/* レーン */
+
+.lane{
+  position:absolute;
+  bottom:110px;
+  width:150px;
+  height:450px;
+}
+
+/* 縦ライン */
+
+.track{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:10px;
+  height:100%;
+  border-radius:999px;
+
+  background:
+    repeating-linear-gradient(
+      to top,
+      #ffffff 0px,
+      #ffffff 14px,
+      #ffd7e8 14px,
+      #ffd7e8 28px
+    );
+
+  box-shadow:
+    0 0 10px rgba(255,255,255,0.9);
+}
+
+/* 横線 */
+
+.cross{
+  position:absolute;
+  height:8px;
+  border-radius:999px;
+  background:#fff;
+  opacity:0.95;
+}
+
+/* 順位 */
+
+.goal{
+  position:absolute;
+  top:130px;
+  width:150px;
+  text-align:center;
+  font-size:34px;
+  color:#9d948e;
+  z-index:20;
+}
+
+.goal.gold{
+  color:#ffb700;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,1),
+    0 0 24px rgba(255,215,0,0.8);
+}
+
+/* カード */
+
+.card{
+  position:absolute;
+
+  width:145px;
+  height:74px;
+
+  border-radius:26px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+  color:white;
+
+  font-size:24px;
+
+  z-index:40;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.18),
+    inset 0 4px 8px rgba(255,255,255,0.35);
+
+  transition:
+    left .65s ease,
+    bottom .65s ease,
+    transform .3s ease;
+}
+
+.card span{
+  font-size:14px;
+  opacity:0.92;
+}
+
+/* ぴょん */
+
+.move{
+  animation:bounce .65s ease;
+}
+
+@keyframes bounce{
+
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.08);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+}
+
+/* スタート */
+
+#startBtn{
+  position:absolute;
+
+  left:50%;
+  bottom:24px;
+
+  transform:translateX(-50%);
+
+  width:260px;
+  height:76px;
+
+  border:none;
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffbfd7,
+      #ffd98c
+    );
+
+  color:white;
+
+  font-size:34px;
+
+  cursor:pointer;
+
+  z-index:100;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.2);
+
+  transition:.2s;
+}
+
+#startBtn:hover{
+
+  transform:
+    translateX(-50%)
+    scale(1.04);
+}
+
+/* 勝者 */
+
+#winner{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+  background:rgba(255,255,255,0.24);
+
+  backdrop-filter:blur(12px);
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:1s;
+
+  z-index:200;
+}
+
+#winner.show{
+  opacity:1;
+}
+
+#winner h1{
+  font-size:120px;
+
+  color:#ffbf00;
+
+  text-shadow:
+    0 0 20px white,
+    0 0 40px gold;
+}
+
+#winner h2{
+  font-size:82px;
+  color:#ff9800;
+}
+
+#winner p{
+  margin-top:10px;
+  font-size:42px;
+  color:#5c5652;
+}
+
+/* 紙吹雪 */
+
+.confetti{
+  position:absolute;
+
+  width:14px;
+  height:14px;
+
+  border-radius:4px;
+
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+
+  0%{
+    transform:
+      translateY(-100px)
+      rotate(0deg);
+  }
+
+  100%{
+    transform:
+      translateY(900px)
+      rotate(720deg);
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 背景 -->
+<img src="haikei(1).png" class="bg">
+
+<div class="overlay"></div>
+
+<!-- タイトル -->
+
+<div class="title">
+  <h1>わんも～推し犬運命あみだ</h1>
+  <p>投票人数ランキング</p>
+</div>
+
+<!-- 本体 -->
+
+<div id="board"></div>
+
+<!-- ボタン -->
+
+<button id="startBtn">
+START
+</button>
+
+<!-- 勝者 -->
+
+<div id="winner">
+  <h1>🥇</h1>
+  <h2>柴犬</h2>
+  <p>22人</p>
+</div>
+
+<script>
+
+/* 犬 */
+
+const dogs = [
+
+{
+  name:'柴犬',
+  votes:22,
+  color:'#ff9f69',
+  x:90
+},
+
+{
+  name:'キャバリア',
+  votes:11,
+  color:'#ffb8d8',
+  x:310
+},
+
+{
+  name:'コーギー',
+  votes:17,
+  color:'#ffd466',
+  x:530
+},
+
+{
+  name:'ビーグル',
+  votes:14,
+  color:'#73ccff',
+  x:750
+},
+
+{
+  name:'ゴールデン',
+  votes:11,
+  color:'#ffc46e',
+  x:970
+}
+
+];
+
+const board =
+document.getElementById('board');
+
+/* 順位 */
+
+const goals = [
+  '🥇1位',
+  '2位',
+  '3位',
+  '4位',
+  '5位'
+];
+
+/* 最終結果 */
+
+const finalOrder = [
+  '柴犬',
+  'コーギー',
+  'ビーグル',
+  'キャバリア',
+  'ゴールデン'
+];
+
+/* レーン生成 */
+
+dogs.forEach((dog,i)=>{
+
+  /* レーン */
+
+  const lane =
+  document.createElement('div');
+
+  lane.className='lane';
+  lane.style.left=dog.x+'px';
+
+  /* 縦ライン */
+
+  const track =
+  document.createElement('div');
+
+  track.className='track';
+
+  lane.appendChild(track);
+
+  /* 横線 */
+
+  for(let j=0;j<6;j++){
+
+    const cross =
+    document.createElement('div');
+
+    cross.className='cross';
+
+    cross.style.width =
+    (70 + Math.random()*70)+'px';
+
+    cross.style.left =
+    (Math.random()>0.5 ? '-25px':'0px');
+
+    cross.style.top =
+    (50 + (j*65))+'px';
+
+    lane.appendChild(cross);
+  }
+
+  board.appendChild(lane);
+
+  /* 順位 */
+
+  const goal =
+  document.createElement('div');
+
+  goal.className='goal';
+
+  if(i===0){
+    goal.classList.add('gold');
+  }
+
+  goal.innerHTML=goals[i];
+
+  goal.style.left=dog.x+'px';
+
+  board.appendChild(goal);
+
+  /* カード */
+
+  const card =
+  document.createElement('div');
+
+  card.className='card';
+
+  card.id='dog'+i;
+
+  card.style.background=dog.color;
+
+  card.style.left=dog.x+'px';
+  card.style.bottom='0px';
+
+  card.innerHTML=`
+    ${dog.name}
+    <span>${dog.votes}人</span>
+  `;
+
+  board.appendChild(card);
+});
+
+/* START */
+
+document
+.getElementById('startBtn')
+.onclick = async()=>{
+
+  document
+  .getElementById('startBtn')
+  .style.display='none';
+
+  /* ランダム移動 */
+
+  for(let step=0;step<10;step++){
+
+    dogs.forEach((dog,i)=>{
+
+      const card =
+      document.getElementById('dog'+i);
+
+      card.classList.add('move');
+
+      const randomX =
+      dog.x +
+      (Math.random()*90 - 45);
+
+      card.style.left =
+      randomX+'px';
+
+      card.style.bottom =
+      ((step+1)*38)+'px';
+
+      setTimeout(()=>{
+        card.classList.remove('move');
+      },650);
+
+    });
+
+    await sleep(700);
+  }
+
+  finalMove();
+};
+
+/* 最後 */
+
+async function finalMove(){
+
+  const finalX = [
+    90,
+    310,
+    530,
+    750,
+    970
+  ];
+
+  for(let i=0;i<finalOrder.length;i++){
+
+    const index =
+    dogs.findIndex(
+      d=>d.name===finalOrder[i]
+    );
+
+    const card =
+    document.getElementById(
+      'dog'+index
+    );
+
+    card.style.left =
+    finalX[i]+'px';
+
+    card.style.bottom =
+    '500px';
+
+    /* 柴犬だけ光る */
+
+    if(finalOrder[i]==='柴犬'){
+
+      card.style.transform =
+      'scale(1.18)';
+
+      card.style.boxShadow =
+      `
+      0 0 42px gold,
+      0 12px 24px rgba(0,0,0,0.18)
+      `;
+    }
+
+    await sleep(350);
+  }
+
+  await sleep(900);
+
+  document
+  .getElementById('winner')
+  .classList.add('show');
+
+  confetti();
+}
+
+/* 紙吹雪 */
+
+function confetti(){
+
+  for(let i=0;i<120;i++){
+
+    const c =
+    document.createElement('div');
+
+    c.className='confetti';
+
+    c.style.left =
+    Math.random()*1280+'px';
+
+    c.style.background =
+    `hsl(${Math.random()*360},90%,70%)`;
+
+    c.style.animationDuration =
+    (3 + Math.random()*3)+'s';
+
+    document.body.appendChild(c);
+
+    setTimeout(()=>{
+      c.remove();
+    },6000);
+  }
+}
+
+function sleep(ms){
+  return new Promise(r=>setTimeout(r,ms));
+}
+
+</script>
+
+</body>
+</html>
