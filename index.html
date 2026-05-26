@@ -246,20 +246,6 @@ body{
     rgba(255,255,255,0.22);
 }
 
-/* 距離線 */
-
-.mark{
-
-  position:absolute;
-  top:12px;
-
-  width:3px;
-  height:66px;
-
-  background:
-    rgba(255,255,255,0.14);
-}
-
 /* ランナー */
 
 .runner{
@@ -543,26 +529,6 @@ START
 </button>
 
 <script>
-
-/* 距離線 */
-
-const trackArea =
-document.querySelector('.trackArea');
-
-for(let i=1;i<=10;i++){
-
-  const mark =
-  document.createElement('div');
-
-  mark.className='mark';
-
-  mark.style.left =
-    (i*100)+'px';
-
-  trackArea.appendChild(mark);
-}
-
-/* 犬 */
 
 const dogs = [
 
