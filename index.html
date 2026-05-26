@@ -44,8 +44,8 @@ body{
   background:
     linear-gradient(
       to bottom,
-      rgba(255,255,255,0.08),
-      rgba(255,255,255,0.03)
+      rgba(255,255,255,0.05),
+      rgba(255,255,255,0.02)
     );
 }
 
@@ -54,17 +54,21 @@ body{
 .screen{
   position:absolute;
   inset:0;
-
   transition:1s;
 }
 
 /* タイトル */
 
 .title{
+
   position:absolute;
-  top:18px;
+
+  top:52px;
+
   width:100%;
+
   text-align:center;
+
   z-index:100;
 }
 
@@ -72,44 +76,43 @@ body{
 
   font-size:28px;
 
-  color:#ffffff;
+  color:#8f5c3f;
 
   letter-spacing:2px;
 
   text-shadow:
-    0 0 10px rgba(255,255,255,1),
-    0 0 18px rgba(255,142,181,0.9);
+    0 2px 8px rgba(255,255,255,0.95),
+    0 0 12px rgba(255,255,255,0.9);
 
-  margin-bottom:2px;
+  margin-bottom:8px;
 }
 
 .title .mainTitle{
 
-  font-size:72px;
+  font-size:76px;
 
-  background:
-    linear-gradient(
-      180deg,
-      #ff9fc9 0%,
-      #ff73ad 45%,
-      #ffb8d6 100%
-    );
+  font-weight:bold;
 
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:#ff5da2;
+
+  -webkit-text-stroke:6px rgba(255,255,255,0.92);
 
   text-shadow:
-    0 0 18px rgba(255,255,255,0.9),
-    0 0 28px rgba(255,120,170,0.75);
-
-  filter:
-    drop-shadow(0 0 10px rgba(255,255,255,0.75));
+    0 0 12px rgba(255,255,255,1),
+    0 0 24px rgba(255,170,210,0.95),
+    0 6px 14px rgba(0,0,0,0.12);
 }
 
 .title p{
-  margin-top:2px;
-  font-size:24px;
-  color:#8d8378;
+
+  margin-top:10px;
+
+  font-size:26px;
+
+  color:#8d6d58;
+
+  text-shadow:
+    0 2px 6px rgba(255,255,255,0.9);
 }
 
 /* 紹介画面 */
@@ -119,12 +122,13 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+
   gap:20px;
 
-  padding-top:180px;
-
-  transform:translateY(40px);
+  padding-top:265px;
 }
+
+/* カード */
 
 .card{
 
@@ -170,17 +174,19 @@ body{
 
   font-size:30px;
 
-  color:#ff8eb5;
+  color:#ff6fae;
 
   text-align:center;
 
   line-height:1.15;
+
+  text-shadow:
+    0 2px 5px rgba(255,255,255,0.9);
 }
 
 /* レース */
 
 #race{
-
   opacity:0;
   pointer-events:none;
 }
@@ -190,7 +196,7 @@ body{
   position:absolute;
 
   left:70px;
-  top:130px;
+  top:160px;
 
   width:1140px;
   height:450px;
@@ -205,7 +211,7 @@ body{
   right:0;
   top:0;
 
-  width:28px;
+  width:30px;
   height:100%;
 
   border-radius:999px;
@@ -222,8 +228,8 @@ body{
   border:3px solid white;
 
   box-shadow:
-    0 0 25px rgba(255,255,255,1),
-    0 0 40px rgba(255,92,168,0.9);
+    0 0 24px rgba(255,255,255,1),
+    0 0 42px rgba(255,92,168,0.9);
 }
 
 /* レーン */
@@ -647,16 +653,12 @@ function animate(){
     const el =
     document.getElementById(d.id);
 
-    /* 柴犬ラスト加速 */
-
     if(
       d.id==='shiba'
       && d.x > 760
     ){
       d.speed += 0.0012;
     }
-
-    /* 超微ランダム */
 
     d.speed +=
       (Math.random()-0.5)*0.004;
@@ -689,8 +691,6 @@ function animate(){
   requestAnimationFrame(animate);
 }
 
-/* 終了 */
-
 async function finishRace(){
 
   running = false;
@@ -703,8 +703,6 @@ async function finishRace(){
   .getElementById('winnerScreen')
   .classList.add('show');
 }
-
-/* 紙吹雪 */
 
 function confetti(){
 
