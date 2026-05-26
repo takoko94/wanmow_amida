@@ -62,24 +62,52 @@ body{
 
 .title{
   position:absolute;
-  top:10px;
+  top:18px;
   width:100%;
   text-align:center;
   z-index:100;
 }
 
-.title h1{
-  font-size:56px;
+.title .miniTitle{
 
-  color:#ff8eb5;
+  font-size:28px;
+
+  color:#ffffff;
+
+  letter-spacing:2px;
 
   text-shadow:
-    0 0 10px rgba(255,255,255,0.95),
-    0 0 24px rgba(255,255,255,0.9);
+    0 0 10px rgba(255,255,255,1),
+    0 0 18px rgba(255,142,181,0.9);
+
+  margin-bottom:2px;
+}
+
+.title .mainTitle{
+
+  font-size:72px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ff9fc9 0%,
+      #ff73ad 45%,
+      #ffb8d6 100%
+    );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:
+    0 0 18px rgba(255,255,255,0.9),
+    0 0 28px rgba(255,120,170,0.75);
+
+  filter:
+    drop-shadow(0 0 10px rgba(255,255,255,0.75));
 }
 
 .title p{
-  margin-top:4px;
+  margin-top:2px;
   font-size:24px;
   color:#8d8378;
 }
@@ -93,9 +121,9 @@ body{
   justify-content:center;
   gap:20px;
 
-  padding-top:70px;
+  padding-top:180px;
 
-  transform:translateY(-10px);
+  transform:translateY(40px);
 }
 
 .card{
@@ -404,8 +432,17 @@ body{
 <div class="screen" id="introScreen">
 
   <div class="title">
-    <h1>クッキー化になるのはどのわんちゃんだ!? わんも～推し犬レース!!</h1>
+
+    <div class="miniTitle">
+      クッキー化になるのはどのわんちゃんだ!?
+    </div>
+
+    <div class="mainTitle">
+      わんも～推し犬レース!!
+    </div>
+
     <p>出走メンバー紹介</p>
+
   </div>
 
   <div id="intro">
@@ -454,7 +491,15 @@ body{
 <div class="screen" id="race">
 
   <div class="title">
-    <h1>RACE START</h1>
+
+    <div class="miniTitle">
+      クッキー化になるのはどのわんちゃんだ!?
+    </div>
+
+    <div class="mainTitle">
+      わんも～推し犬レース!!
+    </div>
+
   </div>
 
   <div class="trackArea">
