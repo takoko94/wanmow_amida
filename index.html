@@ -549,35 +549,35 @@ const dogs = [
 {
   id:'dachs',
   x:0,
-  speed:0.42,
+  speed:0.55,
   final:760
 },
 
 {
   id:'schna',
   x:0,
-  speed:0.47,
+  speed:0.62,
   final:850
 },
 
 {
   id:'maltipoo',
   x:0,
-  speed:0.52,
+  speed:0.69,
   final:930
 },
 
 {
   id:'cavalier',
   x:0,
-  speed:0.57,
+  speed:0.76,
   final:1020
 },
 
 {
   id:'shiba',
   x:0,
-  speed:0.54,
+  speed:0.73,
   final:1080
 }
 
@@ -593,13 +593,13 @@ document
   .getElementById('startBtn')
   .style.display='none';
 
-  await sleep(2800);
+  await sleep(2200);
 
   document
   .getElementById('introScreen')
   .style.opacity='0';
 
-  await sleep(1200);
+  await sleep(900);
 
   const race =
   document.getElementById('race');
@@ -627,14 +627,14 @@ function animate(){
       d.id==='shiba'
       && d.x > 760
     ){
-      d.speed += 0.0012;
+      d.speed += 0.0018;
     }
 
     d.speed +=
-      (Math.random()-0.5)*0.003;
+      (Math.random()-0.5)*0.004;
 
     d.speed =
-      Math.max(0.36,d.speed);
+      Math.max(0.48,d.speed);
 
     d.x += d.speed;
 
@@ -667,7 +667,7 @@ async function finishRace(){
 
   confetti();
 
-  await sleep(1500);
+  await sleep(1200);
 
   document
   .getElementById('winnerScreen')
@@ -690,13 +690,13 @@ function confetti(){
       `hsl(${Math.random()*360},90%,70%)`;
 
     c.style.animationDuration =
-      (3 + Math.random()*2)+'s';
+      (2.5 + Math.random()*1.5)+'s';
 
     document.body.appendChild(c);
 
     setTimeout(()=>{
       c.remove();
-    },5000);
+    },4500);
   }
 }
 
