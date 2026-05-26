@@ -489,5 +489,245 @@ body{
 
 </div>
 
+<!-- レース -->
+
+<div class="screen" id="race">
+
+  <div class="title">
+
+    <div class="miniTitle">
+      クッキー化になるのはどのわんちゃんだ!?
+    </div>
+
+    <div class="mainTitle">
+      わんも～推し犬レース!!
+    </div>
+
+  </div>
+
+  <div class="trackArea">
+
+    <div class="goal"></div>
+
+    <div class="lane">
+      <div class="runner" id="dachs">
+        <img src="dachs.png">
+      </div>
+    </div>
+
+    <div class="lane">
+      <div class="runner" id="schna">
+        <img src="schna.png">
+      </div>
+    </div>
+
+    <div class="lane">
+      <div class="runner" id="maltipoo">
+        <img src="maltipoo.png">
+      </div>
+    </div>
+
+    <div class="lane">
+      <div class="runner" id="shiba">
+        <img src="shiba.png">
+      </div>
+    </div>
+
+    <div class="lane">
+      <div class="runner" id="cavalier">
+        <img src="cavalier.png">
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- 結果 -->
+
+<div id="winnerScreen">
+
+  <img src="shiba.png">
+
+  <h1>🥇</h1>
+
+  <h2>
+    柴犬
+  </h2>
+
+  <p>
+    22人
+  </p>
+
+</div>
+
+<button id="startBtn">
+START
+</button>
+
+<script>
+
+const dogs = [
+
+{
+  id:'dachs',
+  x:0,
+  speed:0.42,
+  final:760
+},
+
+{
+  id:'schna',
+  x:0,
+  speed:0.47,
+  final:850
+},
+
+{
+  id:'maltipoo',
+  x:0,
+  speed:0.52,
+  final:930
+},
+
+{
+  id:'cavalier',
+  x:0,
+  speed:0.57,
+  final:1020
+},
+
+{
+  id:'shiba',
+  x:0,
+  speed:0.54,
+  final:1080
+}
+
+];
+
+let running = false;
+
+document
+.getElementById('startBtn')
+.onclick = async()=>{
+
+  document
+  .getElementById('startBtn')
+  .style.display='none';
+
+  await sleep(2800);
+
+  document
+  .getElementById('introScreen')
+  .style.opacity='0';
+
+  await sleep(1200);
+
+  const race =
+  document.getElementById('race');
+
+  race.style.opacity='1';
+  race.style.pointerEvents='auto';
+
+  running = true;
+
+  animate();
+};
+
+function animate(){
+
+  if(!running)return;
+
+  let finished = 0;
+
+  dogs.forEach((d,index)=>{
+
+    const el =
+    document.getElementById(d.id);
+
+    if(
+      d.id==='shiba'
+      && d.x > 760
+    ){
+      d.speed += 0.0012;
+    }
+
+    d.speed +=
+      (Math.random()-0.5)*0.004;
+
+    d.speed =
+      Math.max(0.36,d.speed);
+
+    d.x += d.speed;
+
+    if(d.x >= d.final){
+
+      d.x = d.final;
+      finished++;
+    }
+
+    el.style.transform =
+    `
+    translateX(${d.x}px)
+    translateY(${Math.sin(Date.now()/180 + index)*2}px)
+    `;
+  });
+
+  if(finished >= dogs.length){
+
+    finishRace();
+
+    return;
+  }
+
+  requestAnimationFrame(animate);
+}
+
+async function finishRace(){
+
+  running = false;
+
+  confetti();
+
+  await sleep(1500);
+
+  document
+  .getElementById('winnerScreen')
+  .classList.add('show');
+}
+
+function confetti(){
+
+  for(let i=0;i<180;i++){
+
+    const c =
+    document.createElement('div');
+
+    c.className='confetti';
+
+    c.style.left =
+      Math.random()*1280+'px';
+
+    c.style.background =
+      `hsl(${Math.random()*360},90%,70%)`;
+
+    c.style.animationDuration =
+      (3 + Math.random()*3)+'s';
+
+    document.body.appendChild(c);
+
+    setTimeout(()=>{
+      c.remove();
+    },6000);
+  }
+}
+
+function sleep(ms){
+  return new Promise(r=>setTimeout(r,ms));
+}
+
+</script>
+
 </body>
 </html>
